@@ -155,14 +155,7 @@ try {
                         <th>date</th>
                     </tr>
                     <?php
-                    function lireLesUsers($id)
-                    {
-                        $pdo = new PDO("mysql:host=localhost;dbname=jeutresor;charset=utf8", 'root', 'root');
-                        $sql = "SELECT * FROM parties WHERE id_membre = $id ORDER BY 'date', score DESC";
-                        return ($pdo->query($sql)->fetchAll());
-                    }
-
-                    $lesUsers = lireLesUsers($id);
+                    $lesUsers = lireLesUsers($pdo, "SELECT * FROM parties WHERE id_membre = $id ORDER BY 'date', score DESC");
                     $pair = false;
                     $c = 1;
                     foreach ($lesUsers as $unUser) {

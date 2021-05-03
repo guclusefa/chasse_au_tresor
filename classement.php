@@ -2,11 +2,9 @@
 <html lang="en">
 
 <head>
-<link rel="icon" href="logo.ico">
+	<link rel="icon" href="logo.ico">
 	<title>Classement</title>
 </head>
-
-
 
 <body>
 	<table align="center" border="1" style="font-weight:bold;width: 50%;">
@@ -22,19 +20,12 @@
 		require 'menu.php';
 		require 'mesfonctions.php';
 		try {
-			function lireLesUsers()
-			{
-				$pdo = new PDO("mysql:host=localhost;dbname=jeutresor;charset=utf8", 'root', 'root');
-				$sql = "SELECT * FROM parties  GROUP BY id_membre ORDER BY score DESC";
-				return ($pdo->query($sql)->fetchAll());
-			}
-
-			$lesUsers = lireLesUsers();
+			$lesUsers = lireLesUsers($pdo, "SELECT * FROM membres, parties  WHERE memb_id = id_membre GROUP BY id_membre ORDER BY score DESC");
 			$pair = false;
 			$c = 1;
 			foreach ($lesUsers as $unUser) {
 				$id_memb = $unUser["id_membre"];
-				$pseudo = requeteSQL("SELECT memb_pseudo FROM membres WHERE memb_id = $id_memb", "memb_pseudo");
+				$pseudo = $unUser['memb_pseudo'];
 				$hs = $unUser['score'];
 				$play = $unUser['compteur'];
 				$date = $unUser['date'];

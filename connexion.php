@@ -28,9 +28,7 @@ try {
                 $erreur = "Tous les champs doivent être complétés !";
             }
         }
-?>
 
-        <?php
         if (isset($_POST['forminscription'])) {
             $pseudo = htmlspecialchars($_POST['pseudo']);
             $mail = htmlspecialchars($_POST['mail']);
@@ -87,7 +85,7 @@ try {
                 $erreur2 = "tous les champs doivent être complétés !";
             }
         }
-        ?>
+?>
         <!DOCTYPE html>
         <html>
 

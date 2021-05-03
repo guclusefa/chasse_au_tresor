@@ -9,12 +9,11 @@
 require "bdd.php";
 require "menu.php";
 require 'mesfonctions.php';
-
 try {
     if (isset($_SESSION['id'])) {
         if (isset($_COOKIE['highscore']) && isset($_COOKIE['compteur'])) {
             $highscore = $_COOKIE['highscore'];
-            $compteur= $_COOKIE['compteur'];
+            $compteur = $_COOKIE['compteur'];
             $pdo->query("INSERT INTO parties(id_membre, score, compteur) VALUES($id, $highscore,$compteur)");
             setcookie("highscore", "", time() - 3600);
             setcookie("compteur", "", time() - 3600);
@@ -48,8 +47,8 @@ try {
                     if (isset($_SESSION['id'])) {
                         echo $maxScore;
                     } else if (isset($_SESSION['highscore'])) {
-                        echo $_SESSION['highscore']. "<br><br>Connectez ou inscrivez<br>vous pour<br>enregistrez votre<br>meilleur score!";;
-                    } else{
+                        echo $_SESSION['highscore'] . "<br><br>Connectez ou inscrivez<br>vous pour<br>enregistrez votre<br>meilleur score!";;
+                    } else {
                         echo 0 . "<br><br>Connectez ou inscrivez<br>vous pour<br>enregistrez votre<br>meilleur score!";
                     }
                     ?>

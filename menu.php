@@ -17,3 +17,4 @@
     } else {
         echo "<p><a href='index.php'>accueil</a> <a href='classement.php'>classement</a> <a href='connexion.php'>se connecter</a></p>";
     }
+?>
