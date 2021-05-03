@@ -23,6 +23,7 @@
 			$lesUsers = lireLesUsers($pdo, "SELECT * FROM membres, parties  WHERE memb_id = id_membre GROUP BY id_membre ORDER BY score DESC");
 			$pair = false;
 			$c = 1;
+			//on list tout les membres avec les meilleurs score qui ont déjà joué au moins 1 partie
 			foreach ($lesUsers as $unUser) {
 				$id_memb = $unUser["id_membre"];
 				$pseudo = $unUser['memb_pseudo'];

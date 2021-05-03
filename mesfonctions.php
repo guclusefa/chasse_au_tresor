@@ -1,5 +1,6 @@
 <?php
 try {
+    //extraire une seule colonne d'une requete sql
     function requeteSQL($pdo, $sql, $colonne)
     {
         $requete = $pdo->prepare($sql);
@@ -8,6 +9,7 @@ try {
         $resultat = $requete[$colonne];
         return $resultat;
     }
+    //information du joueur connecté, ici pour éviter la redondance
     if (isset($_SESSION['id'])) {
         $maxScore = requeteSQL($pdo, "SELECT MAX(score) AS maxscore FROM parties WHERE id_membre = $id", "maxscore");
         $nbParties = requeteSQL($pdo, "SELECT COUNT(*) AS nb FROM parties WHERE id_membre = $id", "nb");
@@ -16,6 +18,7 @@ try {
         $win = requeteSQL($pdo, "SELECT COUNT(*) AS nbWin FROM parties WHERE id_membre = $id AND score > 0", "nbWin");
     }
 
+    //lire toute les lignes d'une requete sql
     function lireLesUsers($pdo, $sql)
     {
         return ($pdo->query($sql)->fetchAll());

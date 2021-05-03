@@ -10,21 +10,26 @@ require "bdd.php";
 require "menu.php";
 require 'mesfonctions.php';
 try {
+    //si connecter
     if (isset($_SESSION['id'])) {
+        //si partie finie, (cookies avec le js)
         if (isset($_COOKIE['highscore']) && isset($_COOKIE['compteur'])) {
             $highscore = $_COOKIE['highscore'];
             $compteur = $_COOKIE['compteur'];
             $pdo->query("INSERT INTO parties(id_membre, score, compteur) VALUES($id, $highscore,$compteur)");
             setcookie("highscore", "", time() - 3600);
             setcookie("compteur", "", time() - 3600);
-            header('Location: index.php');
+            header('Location: index.php'); //actualisé affichage meilleur score
         }
     } else {
+        //si partie fini mais que pas connecter
         if (isset($_COOKIE['highscore'])) {
+            //si un joueur non connecter a déjà jouer, on compare son dernier meilleur score pour update le meileur score actuel
             if (isset($_SESSION['highscore'])) {
                 if ($_COOKIE['highscore'] > $_SESSION['highscore']) {
                     $_SESSION['highscore'] = $_COOKIE['highscore'];
                 }
+            //si joueur n'a jamais joué, on stock le meilleur score, qui sera ensuite enregistrer dans la bdd si il se connecte et que le score est superieur à son meilleur score ou si il s'inscrit
             } else {
                 $_SESSION['highscore'] = $_COOKIE['highscore'];
             }

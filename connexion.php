@@ -2,24 +2,21 @@
 require 'bdd.php';
 require "menu.php";
 try {
+    //verification que personne n'est co
     if (!isset($_SESSION['id'])) {
+        //form connexion
         if (isset($_POST['formconnexion'])) {
             $mailconnect = htmlspecialchars($_POST['mailconnect']);
             $mdpconnect = sha1($_POST['mdpconnect']);
+            //si données sont entrées
             if (!empty($mailconnect) and !empty($mdpconnect)) {
                 $requser = $pdo->prepare("SELECT * FROM membres WHERE memb_mail = ? AND memb_mdp = ? OR memb_pseudo = ? AND memb_mdp = ?");
                 $requser->execute(array($mailconnect, $mdpconnect, $mailconnect, $mdpconnect));
                 $userexist = $requser->rowCount();
+                //si user existe avec identifiant et mdp 
                 if ($userexist == 1) {
                     $userinfo = $requser->fetch();
                     $_SESSION['id'] = $userinfo['memb_id'];
-                    if (isset($_SESSION['highscore'])) {
-                        if ($_SESSION['highscore'] > $userinfo['highscore']) {
-                            $id = $userinfo['memb_id'];
-                            $highscore = $_SESSION['highscore'];
-                            $pdo->query("UPDATE membres SET highscore = $highscore WHERE memb_id = $id");
-                        }
-                    }
                     header("Location: index.php");
                 } else {
                     $erreur = "Mauvais identifiant ou mot de passe !";
@@ -29,16 +26,21 @@ try {
             }
         }
 
+        //form inscription
         if (isset($_POST['forminscription'])) {
             $pseudo = htmlspecialchars($_POST['pseudo']);
             $mail = htmlspecialchars($_POST['mail']);
             $mail2 = htmlspecialchars($_POST['mail2']);
             $mdp = sha1($_POST['mdp']);
             $mdp2 = sha1($_POST['mdp2']);
+            //si données sont entrées
             if (!empty($_POST['pseudo']) and  !empty($_POST['mail']) and !empty($_POST['mail2']) and !empty($_POST['mdp']) and !empty($_POST['mdp2'])) {
                 $pseudolength = strlen($pseudo);
+                //si mdp mini 20 charactere
                 if ($pseudolength <= 20) {
+                    //si aucun espace
                     if (preg_match('/\s/', $pseudo)  == 0) {
+                        //si même mail
                         if ($mail == $mail2) {
                             if (filter_var($mail, FILTER_VALIDATE_EMAIL)) {
                                 $reqmail = $pdo->prepare("SELECT * FROM membres WHERE memb_mail = ?");
@@ -48,11 +50,14 @@ try {
                                 $reqpseudo = $pdo->prepare("SELECT * FROM membres WHERE memb_pseudo = ?");
                                 $reqpseudo->execute(array($pseudo));
                                 $pseudoexist = $reqpseudo->rowCount();
+                                //si mail et pseudo pas déjà utiliser
                                 if ($mailexist == 0 and $pseudoexist == 0) {
-
+                                    //si mdp valide
                                     if ($mdp == $mdp2) {
                                         $mdplength = strlen($_POST['mdp']);
+                                        //si mdp min 4 charactere
                                         if ($mdplength >= 4) {
+                                            //si mdp pas d'espaces
                                             if (preg_match('/\s/', $_POST['mdp'])  == 0) {
                                                 $insertmbr = $pdo->prepare("INSERT INTO membres(memb_pseudo, memb_mail, memb_mdp) VALUES (?,?,?)");
                                                 $insertmbr->execute(array($pseudo, $mail, $mdp));
