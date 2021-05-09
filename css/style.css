@@ -1,0 +1,130 @@
+:root {
+	--font-color: #333;
+	--font-color-light: #4e5f69;
+	--line: #4e5f69;
+	--inputField: #c0d1db;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	font-family: monospace;
+	overflow-x: hidden; 
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+	font-family: inherit;
+	font-size: 100%;
+	margin: 0;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	margin-left: -100px;
+	margin-right: -100px;
+}
+
+
+h1 {
+	font-size: 2.9rem;
+	font-weight: normal;
+}
+
+h1 span {
+	display: block;
+	font-size: 2em;
+}
+
+
+input, select{
+	border-radius: 2em ;
+	outline: 0;
+	border: 0.125rem solid;
+	padding: 0.7em 1.25em;
+	font-size: 1.7rem;
+  width: 20em;
+  margin-top: 1em;
+}
+
+#age {
+  width: 300px;
+}
+
+.select {
+	width: 10rem;
+	border-radius: 2em;
+  padding: 0.656em 0.5em;
+  margin-left: 20px;
+}
+
+
+.msg{
+	margin-top: 30px;
+	margin-left: 200px;
+	margin-right: 200px;
+}
+
+.alert{
+	width:80%;
+	background-color: #ffffff;
+	padding:20px;
+	border:1px solid #eee;
+	border-left-width:5px;
+	border-radius: 3px;
+	margin:10px auto;
+	font-size: 16px;
+	border-left-color: black;
+	background-color: rgb(211, 210, 210);
+}
+
+button{
+	margin-top: 20px;
+	font-size: xx-large;
+	cursor: pointer;
+}
+
+.jsp {
+  margin-left: -50px;
+  font-size: xx-large;
+}
+
+.cadre {
+    display: inline-block;
+    width: 700px;
+    font-size: 18px;
+}
+
+table {
+    border-collapse: collapse; 
+}
+
+td{
+    border: 0.1px solid rgba(0, 0, 0, 0.89);
+	opacity: 0.5;
+    height: 40px;
+    width: 40px;
+}
+
+.titreprofil {
+	border: 1px solid black;
+	padding: 5px;
+}
+
+.pie {
+	width: 400px;
+	height: 400px;
+	border-radius: 50%
+}
+
+input[type="submit"]{
+	cursor:pointer;
+}
