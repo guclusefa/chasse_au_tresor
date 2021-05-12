@@ -60,7 +60,7 @@ fondGris = 'rgb(211, 210, 210)'
 //fonction verifie id dans les liste events, si un id se trouve dans un event, elle retourne sa place dans son tableau, afin d'avoir sa desc, bonus...
 function verifID(liste, id) {
     for (var i = 0; i < liste.length; i++) {
-        if (String(id) == liste[i].position) {
+        if (String(id) == liste[i].getPosition) {
             return liste[i]
         }
     }
@@ -110,9 +110,9 @@ function verif(positionverif) {
                 couleur = "green"
                 fond = fondVert
                 type = "Bonus :"
-                erreur = verifID(tab_events_good, positionverif).desc
-                bonus = verifID(tab_events_good, positionverif).bonus
-                fin = verifID(tab_events_good, positionverif).end
+                erreur = verifID(tab_events_good, positionverif).getDesc
+                bonus = verifID(tab_events_good, positionverif).getBonus
+                fin = verifID(tab_events_good, positionverif).getEnd
 
             }
             //si id se trouve dans event bad
@@ -120,9 +120,9 @@ function verif(positionverif) {
                 couleur = "orange"
                 fond = fondOrange
                 type = "Malus :"
-                erreur = verifID(tab_events_bad, positionverif).desc
-                bonus = verifID(tab_events_bad, positionverif).bonus
-                fin = verifID(tab_events_bad, positionverif).end
+                erreur = verifID(tab_events_bad, positionverif).getDesc
+                bonus = verifID(tab_events_bad, positionverif).getBonus
+                fin = verifID(tab_events_bad, positionverif).getEnd
             }
             //si même ligne que trésor
             else if (String(positionverif[0]) == tresor[0]) {
@@ -203,18 +203,40 @@ for (var i = 0; i < 10; i++) {
 
 //classe evenement
 class Event {
+    //attributs privés
+    #desc
+    #position
+    #bonus
+    #end
+    //constructeur
     constructor(desc, position, bonus, end) {
-        this.desc = desc
-        this.position = position
-        this.bonus = bonus
-        this.end = end
+        this.#desc = desc
+        this.#position = position
+        this.#bonus = bonus
+        this.#end = end
     }
+
+    //les getters
+    get getDesc(){
+        return this.#desc
+    }
+
+    get getPosition(){
+        return this.#position
+    }
+
+    get getBonus(){
+        return this.#bonus
+    }
+
+    get getEnd(){
+        return this.#end
+    }
+
 }
 
 //génération de 10 event bad et 10 events good, on peux augmenter ou diminuer si on le souhaite 
 for (let i = 0; i < 10; i++) {
     tab_events_good[i] = new Event(listeDescGood[alea(0, listeDescGood.length - 1)], aleaID(), alea(100, 1000), false)
-}
-for (let i = 0; i < 10; i++) {
     tab_events_bad[i] = new Event(listeDescBad[alea(0, listeDescBad.length - 1)], aleaID(), alea(-1000, -100), pourcentFin())
 }
