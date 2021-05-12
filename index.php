@@ -60,7 +60,7 @@ try {
                 </span><br>
                 <span id="rejouerid"></span>
             </h2>
-            <table id="tableau" style="float:left;background-image: url('map.jpg');background-size: cover;margin-left:-100px;">
+            <table id="tableau" style="float:left;background-image: url('images/map.jpg');background-size: cover;margin-left:-100px;">
             </table>
         </div>
 
