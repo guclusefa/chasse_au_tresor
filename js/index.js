@@ -204,10 +204,10 @@ for (var i = 0; i < 10; i++) {
 //classe evenement
 class Event {
     //attributs privés
-    #desc
-    #position
-    #bonus
-    #end
+    #desc = String
+    #position = String
+    #bonus = 0
+    #end = Boolean
     //constructeur
     constructor(desc, position, bonus, end) {
         this.#desc = desc
@@ -232,7 +232,6 @@ class Event {
     get getEnd(){
         return this.#end
     }
-
 }
 
 //génération de 10 event bad et 10 events good, on peux augmenter ou diminuer si on le souhaite 
